@@ -8,7 +8,7 @@ Le meilleur choix dans Grafana est le **panel Stat**.
 Voici comment le configurer professionnellement :
 
 ## La Requete SQL
-```sql92
+```sql
 SELECT 
   sum(p.price * oi.quantity) as value
 FROM order_items oi
@@ -26,7 +26,7 @@ un simple chiffre en indicateur pro :
 - Unit : Choisissez Currency > Euro (€) (ou votre devise). Cela ajoute automatiquement
 le symbole et sépare les milliers.
 
-- Decimals : Réglez sur 2 pour éviter les arrondis imprécis sur les centimes.
+- Decimals : Réglez sur 2 pour éviter les arrondis imprécis sur les cents.
 ### Stat Styles (Mise en page)
 - Graph mode : Choisissez Area graph. Cela affichera une petite courbe colorée sous le chiffre, montrant l'évolution sur la période. C'est très visuel pour voir les pics de vente.
 
