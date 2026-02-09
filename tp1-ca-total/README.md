@@ -28,7 +28,8 @@ le symbole et sépare les milliers.
 
 - Decimals : Réglez sur 2 pour éviter les arrondis imprécis sur les cents.
 ### Stat Styles (Mise en page)
-- Graph mode : Choisissez Area graph. Cela affichera une petite courbe colorée sous le chiffre, montrant l'évolution sur la période. C'est très visuel pour voir les pics de vente.
+- Graph mode : Choisissez Area graph. Cela affichera une petite courbe colorée sous le chiffre, 
+  montrant l'évolution sur la période. C'est très visuel pour voir les pics de vente.
 
 - Color mode : Choisissez Background ou Value.
 
