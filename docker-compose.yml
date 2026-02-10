@@ -1,10 +1,10 @@
 volumes:
   grafana-storage:
   postgres-data:
+  mailpit-data:
 
 networks:
-  default:
-    name: ascent
+  ascent:
     driver: bridge
 
 services:
@@ -21,7 +21,8 @@ services:
       - GF_RENDERING_CALLBACK_URL=http://grafana:3000/
       - GF_LOG_FILTERS=rendering:debug # Pour débugger si besoin
     restart: unless-stopped
-
+    networks:
+      - ascent
   renderer:
     image: grafana/grafana-image-renderer:latest
     container_name: renderer
@@ -33,6 +34,23 @@ services:
       - BROWSER_BIN=/usr/bin/google-chrome
       - IGNORE_HTTPS_ERRORS=true
     restart: unless-stopped
+    networks:
+      - ascent
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mailpit
+    environment:
+      MP_DATABASE: /data/mailpit.db
+      MP_UI_AUTH_FILE: /data/authfile
+    ports:
+      - "30025:8025" # Interface Web pour voir les mails
+      - "31025:1025" # Port SMTP pour Grafana
+    volumes:
+      - mailpit-data:/data
+    restart: unless-stopped
+    networks:
+      - ascent
 
   postgres-db:
     image: postgres:15-alpine3.16
@@ -46,4 +64,5 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
-
+    networks:
+      - ascent
