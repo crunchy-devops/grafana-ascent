@@ -16,6 +16,20 @@ CREATE TABLE temperatures (
 Ajoutez cette fonction à votre script Python pour insérer une donnée 
 toutes les 5 minutes (ou moins pour vos tests).
 
+```python
+def simulate_temp():
+    # Génère une valeur entre -20 et +40
+    temp_value = round(random.uniform(-20, 40), 2)
+    cur.execute(
+        "INSERT INTO temperatures (value, time) VALUES (%s, %s)",
+        (temp_value, datetime.now())
+    )
+    conn.commit()
+
+```
+
+
+
 ## Configuration du Panel Gauge (Le visuel)
 ```sql
 SELECT 

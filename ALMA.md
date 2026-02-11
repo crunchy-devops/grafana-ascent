@@ -4,6 +4,7 @@
 ```shell
 sudo dnf -y --refresh update
 sudo dnf upgrade
+#sudo timedatectl set-timezone Europe/Paris
 sudo dnf -y install yum-utils git wget curl
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sudo dnf -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
