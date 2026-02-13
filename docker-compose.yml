@@ -2,6 +2,7 @@ volumes:
   grafana-storage:
   postgres-data:
   mailpit-data:
+  prometheus_data:
 
 networks:
   ascent:
@@ -9,7 +10,8 @@ networks:
 
 services:
   grafana:
-    image: grafana/grafana-oss:latest
+    #image: grafana/grafana-oss:latest
+    image: systemdevformations/grafana:12.3.2
     container_name: grafana
     ports:
       - "32400:3000"
@@ -25,10 +27,13 @@ services:
       - GF_SMTP_FROM_ADDRESS=alert@grafana.local
       - GF_SMTP_SKIP_VERIFY=true
     restart: unless-stopped
+    depends_on:
+      - prometheus
     networks:
       - ascent
   renderer:
-    image: grafana/grafana-image-renderer:latest
+    #image: grafana/grafana-image-renderer:latest
+    image: systemdevformations/grafana-image-renderer:5
     container_name: renderer
     ports:
       - "8081"
@@ -38,11 +43,14 @@ services:
       - BROWSER_BIN=/usr/bin/google-chrome
       - IGNORE_HTTPS_ERRORS=true
     restart: unless-stopped
+    depends_on:
+      - grafana
     networks:
       - ascent
 
   mailpit:
-    image: axllent/mailpit:latest
+    #image: axllent/mailpit:latest
+    image: systemdevformations/mailpit:1.29.0
     container_name: mailpit
     environment:
       MP_DATABASE: /data/mailpit.db
@@ -52,6 +60,19 @@ services:
       - "31025:1025" # Port SMTP pour Grafana
     volumes:
       - mailpit-data:/data
+    restart: unless-stopped
+    networks:
+      - ascent
+
+  prometheus:
+    hostname: prometheus
+    container_name: prometheus
+    image: prom/prometheus:v3.5.1
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    ports:
+      - "32430:9090"
     restart: unless-stopped
     networks:
       - ascent
