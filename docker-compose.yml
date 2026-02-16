@@ -70,10 +70,51 @@ services:
     image: prom/prometheus:v3.5.1
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./alert.rules.yml:/etc/prometheus/alert.rules.yml
       - prometheus_data:/prometheus
     ports:
       - "32430:9090"
     restart: unless-stopped
+    networks:
+      - ascent
+
+  alertmanager:
+    hostname: alertmanager
+    container_name: alertmanager
+    image: prom/alertmanager:v0.31.1
+    command:
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    ports:
+      - "32440:9093"
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    networks:
+      - ascent
+
+
+  postgres-exporter:
+    hostname: postgres-exporter
+    container_name: postgres-exporter
+    image: quay.io/prometheuscommunity/postgres-exporter
+    command:
+      - "--config.file=/etc/postgres_exporter/postgres_exporter.yml"
+      - "--extend.query-path=/etc/postgres_exporter/queries.yaml"
+    environment:
+      DATA_SOURCE_URI: "192.168.1.70:32420/grafana?sslmode=disable"
+      DATA_SOURCE_NAME:  "postgresql://admin:password_772@192.168.1.70:32420/grafana?sslmode=disable"
+      DATA_SOURCE_USER: admin
+      DATA_SOURCE_PASS: password_772
+    ports:
+      - "9187:9187"
+    volumes:
+      - ./postgres_exporter.yml:/etc/postgres_exporter/postgres_exporter.yml
+      - ./queries.yaml:/etc/postgres_exporter/queries.yaml
+    restart: unless-stopped
+    depends_on:
+      - prometheus
     networks:
       - ascent
 

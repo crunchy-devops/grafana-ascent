@@ -1,0 +1,6 @@
+pg_current_temp:
+  query: "SELECT value FROM temperatures ORDER BY time DESC  LIMIT 1;"
+  metric:
+    - value:
+        usage: "GAUGE"
+        description: "last temp"

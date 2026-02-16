@@ -1,0 +1,9 @@
+# Exemple de postgres_exporter.yml
+auth_modules:
+  # Optionnel : utilisé si vous gérez plusieurs cibles via un module d'authentification
+  grafana:
+    type: userpass
+    userpass:
+      username: "admin"
+      password: "password_772"
+

@@ -1,0 +1,18 @@
+groups:
+  - name: temperature_alerts
+    rules:
+      - alert: TemperatureTropBasse
+        # On calcule le taux de rollback par minute sur les 5 dernières minutes
+        expr: pg_current_temp < 0
+
+        # ANTI-FLAPPING : L'alerte doit être vraie pendant 4 minutes
+        # avant de passer de l'état 'PENDING' à 'FIRING'
+        for: 4m
+
+        labels:
+          severity: critical
+          service: postgresql
+
+        annotations:
+          summary: "Temperature negative {{ $labels.datname }}"
+          description: "La temperature est {{ $value }} negative {{ $labels.datname }} depuis plus de 4 minutes."
