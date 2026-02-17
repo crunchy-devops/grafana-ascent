@@ -41,3 +41,4 @@ venv/
 env/
 id_rsa
 export-dashboard.sh
+air.dump
