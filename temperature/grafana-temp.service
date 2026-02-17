@@ -1,0 +1,30 @@
+[Unit]
+Description=Simulateur de données E-commerce et Température pour Grafana
+# S'assure que le service ne démarre qu'après le réseau et Docker (si PostgreSQL est en container)
+
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+User=alma
+Group=alma
+# Chemin vers le dossier contenant votre script
+WorkingDirectory=/home/alma/grafana-ascent/temperature
+
+# Utilisation directe du python dans le virtualenv
+ExecStart=/home/alma/grafana-ascent/temperature/run_simulation.sh
+
+# Redémarrage automatique en cas de crash
+Restart=always
+RestartSec=10
+
+# --- CONFIGURATION MODERNE DES LOGS ---
+# On laisse systemd gérer le flux vers journald
+StandardOutput=journal
+StandardError=journal
+# Un identifiant pour filtrer facilement avec journalctl
+SyslogIdentifier=grafana-simulator
+
+[Install]
+WantedBy=multi-user.target
