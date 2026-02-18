@@ -95,6 +95,17 @@ services:
     networks:
       - ascent
 
+  node-exporter:
+    hostname: node-exporter
+    container_name: node-exporter
+    image: prom/node-exporter:v1.10.2
+    ports:
+      - "32450:9100"
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+    networks:
+      - ascent
 
   postgres-exporter:
     hostname: postgres-exporter
