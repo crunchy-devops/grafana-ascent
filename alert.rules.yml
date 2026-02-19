@@ -12,3 +12,14 @@ groups:
         annotations:
           summary: "Temperature negative {{ $labels.datname }}"
           description: "La temperature est {{ $value }} negative {{ $labels.datname }} depuis plus de 4 minutes."
+
+  - name: disk_limit
+    rules:
+        - alert: DiskOfLimit
+          expr: node_filesystem_avail_bytes{mountpoint="/etc/hosts"} * 100 - ((node_filesystem_avail_bytes{mountpoint="/etc/hosts"} * 100) / node_filesystem_size_bytes{mountpoint="/etc/hosts"}) > 80
+
+          for: 10m
+
+          annotations:
+            summary: "Disk limit reached {{ $labels.instance }}"
+            description: "The disk usage is {{ $value }}% on {{ $labels.instance }} since more than 10 minutes."

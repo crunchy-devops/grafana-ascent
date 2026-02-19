@@ -1,0 +1,51 @@
+networks:
+  grafana-ascent_ascent:
+    external: true
+
+
+services:
+  # 1. L'Application simulée
+  python-app:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM python:3.9-slim
+        RUN pip install prometheus_client flask
+        COPY app_logger.py .
+        CMD ["python", "app_logger.py"]
+    container_name: python-app
+    ports:
+      - "32550:8000"
+    logging:
+      driver: "json-file"
+      options:
+        tag: "{{.Name}}"
+    networks:
+      - grafana-ascent_ascent
+
+  # 3. Loki (Stockage des Logs)
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    ports:
+      - "32460:3100"
+    command:
+      - "-config.file=/etc/loki/local-config.yaml"
+      - "-limits.ingestion-rate-mb=20"
+      - "-limits.ingestion-burst-size-mb=40"
+    networks:
+      - grafana-ascent_ascent
+
+  # 4. Promtail (Agent de collecte des logs)
+  promtail:
+    image: grafana/promtail:latest
+    user: root
+    container_name: promtail
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:Z
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ./promtail-config.yml:/etc/promtail/config.yml
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - grafana-ascent_ascent
+

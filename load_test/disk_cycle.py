@@ -15,7 +15,7 @@ if not os.path.exists(TARGET_DIR):
 
 def create_file():
     while True:
-        timestamp = int(time.time())
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = os.path.join(TARGET_DIR, f"{FILE_PREFIX}{timestamp}.bin")
         print(f"[{datetime.now()}] Création de {filename}...")
 
