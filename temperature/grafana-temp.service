@@ -24,7 +24,7 @@ RestartSec=10
 StandardOutput=journal
 StandardError=journal
 # Un identifiant pour filtrer facilement avec journalctl
-SyslogIdentifier=grafana-simulator
+SyslogIdentifier=grafana-temp
 
 [Install]
 WantedBy=multi-user.target
