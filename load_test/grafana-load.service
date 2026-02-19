@@ -12,7 +12,7 @@ Group=alma
 WorkingDirectory=/home/alma/grafana-ascent/load_test
 
 # Utilisation directe du python dans le virtualenv
-ExecStart=/home/alma/grafana-ascent/load_test/disk_cycle.py
+ExecStart=/home/alma/grafana-ascent/venv/bin/python3 disk_cycle.py
 
 # Redémarrage automatique en cas de crash
 Restart=always
