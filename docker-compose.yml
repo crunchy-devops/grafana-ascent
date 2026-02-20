@@ -116,7 +116,7 @@ services:
       - "--extend.query-path=/etc/postgres_exporter/queries.yaml"
     environment:
       DATA_SOURCE_URI: "postgres-db:5432/grafana?sslmode=disable"
-      #DATA_SOURCE_NAME:  "postgresql://admin:password_772@postgres-db:5432/grafana?sslmode=disable"
+      #DATA_SOURCE_NAME:  "postgresql://NO_DATA@postgres-db:5432/grafana?sslmode=disable"
       DATA_SOURCE_USER: admin
       DATA_SOURCE_PASS: password_772
     ports:
