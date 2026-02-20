@@ -4,7 +4,11 @@
 ```shell
 sudo dnf -y --refresh update
 sudo dnf upgrade
-#sudo timedatectl set-timezone Europe/Paris
+getenforce
+sudo vi /etc/selinux/config  # set SELINUX=disabled 
+sud reboot
+getenforce  # check
+#sudo timedatectl set-timezone Etc/UTC
 sudo dnf -y install yum-utils git wget curl
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sudo dnf -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
