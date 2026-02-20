@@ -1,5 +1,5 @@
 [Unit]
-Description=Simulateur de données E-commerce et Température pour Grafana
+Description=Simulateur de données E-commerce
 # S'assure que le service ne démarre qu'après le réseau et Docker (si PostgreSQL est en container)
 
 After=network.target docker.service
