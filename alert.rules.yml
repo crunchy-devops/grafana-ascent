@@ -16,7 +16,7 @@ groups:
   - name: disk_limit
     rules:
         - alert: DiskOfLimit
-          expr: node_filesystem_avail_bytes{mountpoint="/etc/hosts"} * 100 - ((node_filesystem_avail_bytes{mountpoint="/etc/hosts"} * 100) / node_filesystem_size_bytes{mountpoint="/etc/hosts"}) > 80
+          expr: (1 - node_filesystem_avail_bytes{mountpoint="/etc/hosts"} / node_filesystem_size_bytes{mountpoint="/etc/hosts"}) * 100  > 80
 
           for: 10m
 

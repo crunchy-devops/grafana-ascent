@@ -4,7 +4,7 @@
 Le paysage technologique contemporain est marqué par une explosion exponentielle de la télémétrie, 
 où la capacité d'une organisation à interpréter ses données en temps réel définit sa résilience opérationnelle. 
 Au centre de cet écosystème se trouve Grafana, une plateforme devenue l'outil de référence pour la visualisation et
-l'analyse des données de séries temporelles.1 Initialement conçu comme une simple couche de visualisation, 
+l'analyse des données de séries temporelles. Initialement conçu comme une simple couche de visualisation, 
 Grafana a évolué pour devenir ce que les experts qualifient désormais de véritable « système d'exploitation de 
 l'observabilité ».
 

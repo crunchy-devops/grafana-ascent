@@ -5,11 +5,11 @@ from datetime import datetime
 
 # CONFIGURATION - À adapter selon vos identifiants AlmaLinux
 DB_CONFIG = {
-    "host": "localhost",
-    "port": 5432,
-    "database": "ma_base_donnees",
-    "user": "admin_user",
-    "password": "password_db"
+    "host": "postgres-db",
+    "port": xxxxx,
+    "database": "grafana",
+    "user": "admin",
+    "password": "xxxx"
 }
 
 def run_simulation():

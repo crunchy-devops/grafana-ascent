@@ -19,7 +19,7 @@ Changer les paramètres de la base de données dans le fichier simulator.py
 ```shell
 cd 
 cd grafana-ascent/db
-sudo setenforce 0
+#sudo setenforce 0
 sudo cp grafana-simulator.service /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl enable grafana-simulator

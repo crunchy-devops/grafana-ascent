@@ -1,14 +1,14 @@
-import psycopg2
+import psycopg2  #
 import time
 from datetime import datetime
 
 # Configuration PostgreSQL
 DB_CONFIG = {
     "dbname": "grafana",
-    "user": "user",
-    "password": "password",
+    "user": "admin",
+    "password": "xxxxx",
     "host": "postgres-db",
-    "port": "5432"
+    "port": "xxxxx"
 }
 
 def insert_temp(val):
