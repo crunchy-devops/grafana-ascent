@@ -62,3 +62,13 @@ L'anti-flapping est un mécanisme essentiel en monitoring qui permet de filtrer 
 généré par une métrique instable.
 Imaginez une température qui oscille entre -0.1°C et +0.1°C toutes les 30 secondes alors que votre seuil d'alerte est à 0°C. 
 Sans anti-flapping, vous recevriez des dizaines de notifications Slack « Alerte » suivies de « OK » (c'est ce qu'on appelle le flapping).
+
+
+## Commande
+sudo cp grafana-temp.service /etc/systemd/system
+sudo systemctl daemon-reload
+sudo systemctl enable grafana-temp
+sudo systemctl start grafana-temp
+sudo systemctl status grafana-temp
+
+journalctl -u grafana-temp -f

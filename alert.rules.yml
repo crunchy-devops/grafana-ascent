@@ -1,17 +1,17 @@
 groups:
   - name: temperature_alerts
     rules:
-      - alert: TemperatureTropBasse
+        - alert: TemperatureTropBasse
         #
-        expr: pg_current_temp_value < 0
+          expr: pg_current_temp_value < 0
 
         # ANTI-FLAPPING : L'alerte doit être vraie pendant 4 minutes
         # avant de passer de l'état 'PENDING' à 'FIRING'
-        for: 4m
+          for: 4m
 
-        annotations:
-          summary: "Temperature negative {{ $labels.datname }}"
-          description: "La temperature est {{ $value }} negative {{ $labels.datname }} depuis plus de 4 minutes."
+          annotations:
+            summary: "Temperature negative {{ $labels.datname }}"
+            description: "La temperature est {{ $value }} negative {{ $labels.datname }} depuis plus de 4 minutes."
 
   - name: disk_limit
     rules:
